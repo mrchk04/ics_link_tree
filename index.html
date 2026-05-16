@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ІКС НУОП — Посилання</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #1f1f1f;
+        --pink: #ff007f;
+        --lime: #bfff00;
+        --white: #ffffff;
+        --card-bg: #2a2a2a;
+        --card-border: #333;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--white);
+        font-family: "Space Mono", monospace;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem 3rem;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Grid background */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 0, 127, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(191, 255, 0, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Glow blobs */
+      body::after {
+        content: "";
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 127, 0.08) 0%,
+          transparent 70%
+        );
+        top: -100px;
+        right: -100px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .blob2 {
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(191, 255, 0, 0.07) 0%,
+          transparent 70%
+        );
+        bottom: -80px;
+        left: -80px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        animation: fadeDown 0.6s ease both;
+      }
+
+      .logo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 99px;
+        padding: 0.4rem 1rem;
+        margin-bottom: 1.2rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .logo-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--lime);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .title {
+        font-family: "Unbounded", sans-serif;
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .title span.pink {
+        color: var(--pink);
+      }
+      .title span.lime {
+        color: var(--lime);
+      }
+
+      .subtitle {
+        margin-top: 0.7rem;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* Links */
+      .links {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .link-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color 0.2s,
+          transform 0.2s,
+          background 0.2s;
+        animation: fadeUp 0.5s ease both;
+      }
+
+      .link-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .link-card:nth-child(2) {
+        animation-delay: 0.18s;
+      }
+      .link-card:nth-child(3) {
+        animation-delay: 0.26s;
+      }
+      .link-card:nth-child(4) {
+        animation-delay: 0.34s;
+      }
+
+      .link-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      .link-card.pink-hover::before {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 127, 0.08) 0%,
+          transparent 60%
+        );
+      }
+      .link-card.lime-hover::before {
+        background: linear-gradient(
+          135deg,
+          rgba(191, 255, 0, 0.08) 0%,
+          transparent 60%
+        );
+      }
+
+      .link-card:hover {
+        transform: translateY(-2px);
+        background: #2e2e2e;
+      }
+      .link-card.pink-hover:hover {
+        border-color: var(--pink);
+      }
+      .link-card.lime-hover:hover {
+        border-color: var(--lime);
+      }
+      .link-card:hover::before {
+        opacity: 1;
+      }
+
+      .link-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.1rem;
+      }
+
+      .link-card.pink-hover .link-icon {
+        background: rgba(255, 0, 127, 0.15);
+        color: var(--pink);
+      }
+      .link-card.lime-hover .link-icon {
+        background: rgba(191, 255, 0, 0.12);
+        color: var(--lime);
+      }
+
+      .link-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .link-name {
+        font-family: "Unbounded", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .link-desc {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 0.2rem;
+        letter-spacing: 0.03em;
+      }
+
+      .link-arrow {
+        font-size: 1rem;
+        opacity: 0.3;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        flex-shrink: 0;
+      }
+
+      .link-card:hover .link-arrow {
+        opacity: 0.8;
+        transform: translateX(3px);
+      }
+
+      /* Divider */
+      .divider {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 1.2rem 0 1rem;
+        animation: fadeUp 0.5s ease 0.4s both;
+      }
+
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--card-border);
+      }
+
+      .divider-label {
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.25);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      /* Bonus card */
+      .bonus-card {
+        animation-delay: 0.48s;
+        border-style: dashed;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 2.5rem;
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.15);
+        letter-spacing: 0.1em;
+        text-align: center;
+        animation: fadeUp 0.5s ease 0.6s both;
+      }
+
+      /* Keyframes */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.85);
+        }
+      }
+    </style>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <div class="blob2"></div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo-badge">
+          <span class="logo-dot"></span>
+          НУОП ІКС
+        </div>
+        <h1 class="title">
+          <span class="pink">ІКС</span><br />
+          <span class="lime">Абітурієнту</span>
+        </h1>
+        <p class="subtitle">Інститут комп'ютерних систем</p>
+      </header>
+
+      <!-- Main links -->
+      <div class="links">
+        <a
+          class="link-card pink-hover"
+          href="https://t.me/abiturient_ics"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="link-icon"><i class="ph ph-chats-circle"></i></div>
+          <div class="link-text">
+            <div class="link-name">Абітурієнт ІКС</div>
+            <div class="link-desc">Чат для вступників</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a
+          class="link-card lime-hover"
+          href="https://t.me/ics_vstup"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="link-icon"><i class="ph ph-graduation-cap"></i></div>
+          <div class="link-text">
+            <div class="link-name">ІКС Вступ</div>
+            <div class="link-desc">Новини та оголошення про вступ</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a
+          class="link-card pink-hover"
+          href="https://t.me/onpu_ics"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="link-icon"><i class="ph ph-telegram-logo"></i></div>
+          <div class="link-text">
+            <div class="link-name">НУОП ІКС</div>
+            <div class="link-desc">Офіційний канал інституту</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a
+          class="link-card lime-hover"
+          href="https://op.edu.ua/ics"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="link-icon"><i class="ph ph-globe"></i></div>
+          <div class="link-text">
+            <div class="link-name">Сайт ІКС</div>
+            <div class="link-desc">Сайт інституту</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- Bonus divider -->
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-label">ексклюзивно</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="links">
+        <a
+          class="link-card lime-hover bonus-card"
+          href="https://docs.google.com/document/d/1t60zRorvAIDBEq4YQc6V9nVBHuepIzN8PGqpULhTp38/edit?tab=t.0"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="link-icon"><i class="ph ph-book-open"></i></div>
+          <div class="link-text">
+            <div class="link-name">Екциклопедія НУОП</div>
+            <div class="link-desc">Посібник від ІГН до ІШІРу для малюків</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+      </div>
+
+      <footer class="footer">ІКС · НУОП · Одеса</footer>
+    </div>
+  </body>
+</html>
